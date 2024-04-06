@@ -1,7 +1,7 @@
 import { readFileSync } from 'fs';
 class QuestionModel{
     constructor() {
-        this.questions = JSON.parse(readFileSync('/home/mahesh/quiz_app/src/data/questions.json'));
+        this.questions = JSON.parse(readFileSync('src/data/questions.json'));
     }
 
     getQuestions() {
