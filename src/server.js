@@ -26,6 +26,10 @@ app.post('/submit', (req, res) => {
     handleQuizSubmission(req, res);
 })
 
+app.get('/check-answers', (req, res) => {
+    showAnswers(req, res);
+})
+
 app.use((req, res) => {
     sendResponse(res, 404, 'text/plain', 'Page not found')
 });
@@ -50,19 +54,29 @@ function sendResponse(res, statusCode, contentType, data) {
 
 function handleQuizSubmission(req,res) {
     const answers = req.body;
-    const score = calculateScore(answers);
-    sendResponse(res, 200, 'application/json', JSON.stringify({ score }));
+    const { score, answerStatus } = calculateScore(answers);
+    sendResponse(res, 200, 'application/json', JSON.stringify({ score,answerStatus }));
+}
+
+function showAnswers(req, res){
+    const answers = quizController.getAnswers();
+    sendResponse(res,200,'application/json',JSON.stringify(answers))
 }
 
 function calculateScore(answers) {
     let score = 0;
+    let answerStatus = new Array(15).fill(0);
     answers.forEach((answer, index) => {
         if (quizController.checkAnswer(index, answer)) {
+            answerStatus[index] = 1
             score++;
         }
     })
-    return score;
+
+    return {score,answerStatus};
 }
+
+
 
 
 app.listen(PORT, () => {

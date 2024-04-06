@@ -11,6 +11,13 @@ class QuestionModel{
     getAnswer(questionIndex) {
         return this.questions[questionIndex].answer;
     }
+
+    getAllAnswerList() {
+        const allAnswer = [];
+        this.questions.forEach((question) =>
+            allAnswer.push(question.answer));
+        return allAnswer;
+    }
 }
 
 export default QuestionModel;

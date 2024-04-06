@@ -1,13 +1,147 @@
 [
-    {
-      "question": "What is the capital of France?",
-      "options": ["London", "Paris", "Berlin", "Rome"],
-      "answer": "Paris"
-    },
-    {
-      "question": "Which planet is known as the Red Planet?",
-      "options": ["Earth", "Mars", "Jupiter", "Venus"],
-      "answer": "Mars"
-    }
+  {
+    "question": "What is Node.js?",
+    "options": [
+      "A web browser",
+      "A server-side JavaScript runtime",
+      "A database management system",
+      "A programming language"
+    ],
+    "answer": "A server-side JavaScript runtime"
+  },
+  {
+    "question": "Who developed Node.js?",
+    "options": [
+      "Ryan Dahl",
+      "Bill Gates",
+      "Mark Zuckerberg",
+      "Steve Jobs"
+    ],
+    "answer": "Ryan Dahl"
+  },
+  {
+    "question": "Which global object provides functionality to control the Node.js runtime process?",
+    "options": ["Global", "Runtime", "Process", "NodeControl"],
+    "answer": "Process"
+  },
+  {
+    "question": "What is the package manager for Node.js?",
+    "options": [
+      "NPM",
+      "Bower",
+      "Yarn",
+      "Pip"
+    ],
+    "answer": "NPM"
+  },
+  {
+    "question": "What does the 'require' function do in Node.js?",
+    "options": [
+      "It imports external modules",
+      "It creates a new file",
+      "It defines a variable",
+      "It deletes a file"
+    ],
+    "answer": "It imports external modules"
+  },
+  {
+    "question": "What is the file extension for Node.js modules?",
+    "options": [
+      ".js",
+      ".node",
+      ".json",
+      ".mjs"
+    ],
+    "answer": ".js"
+  },
+  {
+    "question": "What does the 'process' object in Node.js represent?",
+    "options": [
+      "The current user",
+      "The current process",
+      "The current directory",
+      "The current date"
+    ],
+    "answer": "The current process"
+  },
+  {
+    "question": "Which module in Node.js is used for building web servers?",
+    "options": [
+      "http",
+      "fs",
+      "path",
+      "url"
+    ],
+    "answer": "http"
+  },
+  {
+    "question": "What is the purpose of the 'fs' module in Node.js?",
+    "options": [
+      "To handle file system operations",
+      "To manage databases",
+      "To create HTTP servers",
+      "To format text"
+    ],
+    "answer": "To handle file system operations"
+  },
+  {
+    "question": "What does 'npm init' command do?",
+    "options": [
+      "Initializes a new Git repository",
+      "Installs Node.js on the system",
+      "Creates a new Node.js project",
+      "Updates all installed packages"
+    ],
+    "answer": "Creates a new Node.js project"
+  },
+  {
+    "question": "What is the purpose of 'npm install' command?",
+    "options": [
+      "To uninstall a package",
+      "To update all packages",
+      "To install a package and its dependencies",
+      "To list all installed packages"
+    ],
+    "answer": "To install a package and its dependencies"
+  },
+  {
+    "question": "What is the event-driven architecture in Node.js?",
+    "options": [
+      "A design pattern for web applications",
+      "A framework for building APIs",
+      "A method for handling asynchronous operations",
+      "A programming paradigm for real-time applications"
+    ],
+    "answer": "A programming paradigm for real-time applications"
+  },
+  {
+    "question": "What is the purpose of 'require.resolve()' function in Node.js?",
+    "options": [
+      "To resolve a file path",
+      "To resolve a module path",
+      "To resolve a package version",
+      "To resolve a function reference"
+    ],
+    "answer": "To resolve a module path"
+  },
+  {
+    "question": "What is the purpose of 'child_process' module in Node.js?",
+    "options": [
+      "To manage child processes",
+      "To handle user input",
+      "To manipulate files",
+      "To generate random numbers"
+    ],
+    "answer": "To manage child processes"
+  },
+  {
+    "question": "What is 'npm start' command used for?",
+    "options": [
+      "To start the Node.js server",
+      "To start a new project",
+      "To start the development environment",
+      "To start all installed packages"
+    ],
+    "answer": "To start the Node.js server"
+  }
 ]
-  

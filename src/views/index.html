@@ -6,8 +6,10 @@
     <title>Quiz Application</title>
   </head>
   <body>
+    <h1 style="text-align: center">NodeJS Quiz</h1>
     <div id="quiz"></div>
     <button onclick="submitAnswers()">Submit</button>
+    <button onclick="checkAnswers()">Check Answers</button>
     <div id="result"></div>
     <script>
       function loadQuestions() {
@@ -17,6 +19,7 @@
             const quizDiv = document.getElementById('quiz');
             questions.forEach((question, index) => {
               const questionDiv = document.createElement('div');
+              questionDiv.setAttribute('id', `question${index}`);
               questionDiv.innerHTML = `<p>${index + 1}.${
                 question.question
               }<p/>`;
@@ -36,15 +39,16 @@
       function submitAnswers() {
         const answers = [];
         const radioGroups = document.querySelectorAll('[name^="question"]');
-        radioGroups.forEach((radioGroup) => {
-          const selectedOption = [...radioGroup.children].find(
-            (child) => child.checked
-          );
-          if (selectedOption) {
-            answers.push(selectedOption.value);
-          }
-        });
 
+        //NodeList is converted into the array
+        const createdArray = Array.from(radioGroups);
+        const filteredArray = createdArray.filter((radio) => radio.checked);
+
+        //new Array created for selecting answers from the option
+        filteredArray.forEach((radio) => {
+          answers.push(radio.value);
+        });
+        
         fetch('/submit', {
           method: 'POST',
           headers: {
@@ -55,11 +59,26 @@
           .then((response) => response.json())
           .then((data) => {
             const resultDiv = document.getElementById('result');
-            resultDiv.innerHTML = `Your score: ${data.score}/${radioGroups.length}`;
+            resultDiv.innerHTML = `Your score: ${data.score}/${
+              radioGroups.length / 4
+            }`;
           });
       }
 
       document.addEventListener('DOMContentLoaded', loadQuestions);
+
+      function checkAnswers() {
+        fetch('/check-answers')
+          .then((response) => response.json())
+          .then((answer) => {
+            answer.forEach((ans, index) => {
+              const questionDiv = document.getElementById(`question${index}`);
+              const answerDiv = document.createElement('p');
+              answerDiv.innerHTML = `Answer: ${ans}`;
+              questionDiv.appendChild(answerDiv);
+            });
+          });
+      }
     </script>
   </body>
 </html>
