@@ -73,9 +73,9 @@ After installing node, this project will need yarn too, so just run the followin
 
 ## Project live url
 
-- Project - https://social-networking-app.onrender.com
+- Project - https://quiz-application-0ncs.onrender.com/
 
 ## Sample Screenshot
 
-![Alt text](/src/assets/quizApp_screenshot.png)
-![Alt text](/src/assets/quizApp_screenshot1.png)
+![Alt text](/src/assets/quizApp_screenshot.png.png)
+![Alt text](/src/assets/quizApp_screenshot1.png.png)
