@@ -1,8 +1,7 @@
-import fs from "fs";
-
+import { readFileSync } from 'fs';
 class QuestionModel{
     constructor() {
-        this.questions = JSON.parse(fs.readFileSync('src/models/quiz.model.js'));
+        this.questions = JSON.parse(readFileSync('/home/mahesh/quiz_app/src/data/questions.json'));
     }
 
     getQuestions() {
@@ -14,4 +13,4 @@ class QuestionModel{
     }
 }
 
-export {QuestionModel}
+export default QuestionModel;

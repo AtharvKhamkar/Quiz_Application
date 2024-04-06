@@ -1,5 +1,4 @@
-import { QuestionModel } from "../models/quiz.model";
-
+import QuestionModel from '../models/quiz.model.js';
 class QuizController{
     constructor() {
         this.questionModel = new QuestionModel();
@@ -11,8 +10,8 @@ class QuizController{
 
     checkAnswer(questionIndex, userAnswer) {
         const correctAnswer = this.questionModel.getAnswer(questionIndex);
-        return correctAnswer === userAnswer;
+        return userAnswer === correctAnswer;
     }
 }
 
-export {QuizController}
+export default QuizController;
