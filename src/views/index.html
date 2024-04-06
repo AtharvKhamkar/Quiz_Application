@@ -6,12 +6,35 @@
     <title>Quiz Application</title>
   </head>
   <body>
+    <!--HEADER-->
     <h1 style="text-align: center">NodeJS Quiz</h1>
+    <hr />
+
+    <!--INSTRUCTIONS-->
+    <h2>Welcome to the NodeJs Quiz App!</h2>
+    <h3>To begin the quiz, follow these steps:</h3>
+    <p>1.Read each question carefully.</p>
+    <p>2.Choose the correct answer from the provided options.</p>
+    <p>3.Your score will be displayed at the end of the quiz.</p>
+
+    <h4>
+      <b>Note:</b>You must have to answer all 15 questions to complete the quiz.
+    </h4>
+    <h4>Let's test your NodeJS knowledge!</h4>
+    <hr />
+
+    <!--STARTING QUIZ-->
     <div id="quiz"></div>
+    <hr />
     <button onclick="submitAnswers()">Submit</button>
     <button onclick="checkAnswers()">Check Answers</button>
-    <div id="result"></div>
+
+    <!--SCORE-->
+    <div id="result" style="font-size: larger"></div>
+
+    <!--JAVASCRIPT-->
     <script>
+      //Function to load all the question when page loads.It send request to "/questions" end point and after creating HTML elements all questions are displayed
       function loadQuestions() {
         fetch('/questions')
           .then((response) => response.json())
@@ -36,6 +59,7 @@
           });
       }
 
+      //Function that collects all the user answers in a single array and send POST request to the "/submit" route.After sending request score is returned as a response and in the end score is displayed.
       function submitAnswers() {
         const answers = [];
         const radioGroups = document.querySelectorAll('[name^="question"]');
@@ -49,6 +73,7 @@
           answers.push(radio.value);
         });
 
+        //sending POST request
         fetch('/submit', {
           method: 'POST',
           headers: {
@@ -62,6 +87,8 @@
             resultDiv.innerHTML = `Your score: ${data.score}/${
               radioGroups.length / 4
             }`;
+
+            //Highlight question div with green colour if the answer is correct and div is coloured with red colour if question is wrong.
             data.answerStatus.forEach((ans, index) => {
               const ques = document.getElementById(`question${index}`);
               if (ans == 1) {
@@ -74,8 +101,10 @@
         checkAnswers();
       }
 
+      //Event is used to execute the script file before loading the CSS.
       document.addEventListener('DOMContentLoaded', loadQuestions);
 
+      //function that send GET request to the "/check-answers" endpoint and get All the answers of question and append each answer in end of respective question
       function checkAnswers() {
         fetch('/check-answers')
           .then((response) => response.json())

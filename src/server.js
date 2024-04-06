@@ -1,41 +1,59 @@
 import bodyParser from 'body-parser';
+import dotenv from "dotenv";
 import express from 'express';
-import fs from 'fs';
+import fs from "fs";
 import path from 'path';
 import { fileURLToPath } from 'url';
-import QuizController from './controllers/quiz.controller.js';
+import { handleQuizSubmission, provideQuestion, showAnswers } from './controllers/functionality.controller.js';
+import { sendResponse } from './utils/response.util.js';
 
+dotenv.config({
+    path: './env'
+})
 const app = express();
-const PORT = 1313;
-const quizController = new QuizController();
+const PORT = process.env.PORT;
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
+
+
+
 app.use(express.static(path.join(__dirname,"public")))
 
+
+//middleware used to parse JSON data into javascript object
 app.use(bodyParser.json());
 
+
+//home endpoint that serves index.html file as a home page
 app.get('/', (req, res) => {
     serveStaticFile(res, 'text/html', '/views/index.html');
 })
 
+
+//Endpoint that serves all the questions
 app.get('/questions', (req, res) => {
-    sendResponse(res, 200, 'application/json', JSON.stringify(quizController.getQuestions()));
+    provideQuestion(req, res);
 });
 
+
+//Endpoint that handles functionality of checking score after submission
 app.post('/submit', (req, res) => {
     handleQuizSubmission(req, res);
 })
 
+
+//Endpoint that displays all the answers of the each question
 app.get('/check-answers', (req, res) => {
     showAnswers(req, res);
 })
 
+
+//This endpoint is used to handle request at the unknown endpoint
 app.use((req, res) => {
     sendResponse(res, 404, 'text/plain', 'Page not found')
 });
 
-
-
+//function to serve static files in the project directory
 function serveStaticFile(res, contentType, filePath) {
     fs.readFile(path.join(__dirname, filePath), (err, data) => {
         if (err) {
@@ -46,39 +64,7 @@ function serveStaticFile(res, contentType, filePath) {
     });
 }
 
-
-function sendResponse(res, statusCode, contentType, data) {
-    res.writeHead(statusCode, { 'Content-Type': contentType });
-    res.end(data);
-}
-
-function handleQuizSubmission(req,res) {
-    const answers = req.body;
-    const { score, answerStatus } = calculateScore(answers);
-    sendResponse(res, 200, 'application/json', JSON.stringify({ score,answerStatus }));
-}
-
-function showAnswers(req, res){
-    const answers = quizController.getAnswers();
-    sendResponse(res,200,'application/json',JSON.stringify(answers))
-}
-
-function calculateScore(answers) {
-    let score = 0;
-    let answerStatus = new Array(15).fill(0);
-    answers.forEach((answer, index) => {
-        if (quizController.checkAnswer(index, answer)) {
-            answerStatus[index] = 1
-            score++;
-        }
-    })
-
-    return {score,answerStatus};
-}
-
-
-
-
-app.listen(PORT, () => {
+//server is running
+app.listen(process.env.PORT, () => {
     console.log(`Server is running on PORT ${PORT}`);
 })
