@@ -48,7 +48,7 @@
         filteredArray.forEach((radio) => {
           answers.push(radio.value);
         });
-        
+
         fetch('/submit', {
           method: 'POST',
           headers: {
@@ -62,7 +62,16 @@
             resultDiv.innerHTML = `Your score: ${data.score}/${
               radioGroups.length / 4
             }`;
+            data.answerStatus.forEach((ans, index) => {
+              const ques = document.getElementById(`question${index}`);
+              if (ans == 1) {
+                ques.style.backgroundColor = 'lightgreen';
+              } else {
+                ques.style.backgroundColor = 'lightpink';
+              }
+            });
           });
+        checkAnswers();
       }
 
       document.addEventListener('DOMContentLoaded', loadQuestions);
